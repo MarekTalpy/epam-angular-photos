@@ -10,7 +10,7 @@ const ROOT_URL = 'https://picsum.photos';
 export class PhotosApiService {
   constructor(private http: HttpClient) {}
 
-  fetchPhotos(limit = 100): Observable<Photo[]> {
+  fetchPhotos(limit = 30): Observable<Photo[]> {
     const randomDelay = Math.floor(Math.random() * (300 - 200 + 1) + 200);
     return this.http
       .get<Photo[]>(`${ROOT_URL}/v2/list?limit=${limit}`)

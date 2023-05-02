@@ -1,1 +1,3 @@
-All Photos Screen
+<ng-container *ngIf="photos$ | async">
+  <app-photos-grid [photos]="photos$ | async">
+<ng-container />

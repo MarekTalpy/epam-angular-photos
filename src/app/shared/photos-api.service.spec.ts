@@ -49,7 +49,7 @@ describe('Photos', () => {
         expect(photos).toEqual(dummyPhotos);
       });
 
-      const req = httpMock.expectOne(`https://picsum.photos/v2/list?limit=100`);
+      const req = httpMock.expectOne(`https://picsum.photos/v2/list?limit=30`);
       expect(req.request.method).toBe('GET');
       req.flush(dummyPhotos);
     });

@@ -1,0 +1,17 @@
+<section>
+  <ul class="photos-grid">
+    <li class="photo-tile" *ngFor="let photo of photos">
+      <img
+        class="photo-tile-image"
+        [src]="photo.download_url | resizeImage"
+        [id]="photo.id"
+        alt="photo tile"
+        class="photo-tile-image"
+        (click)="handlePhotoClick(photo)"
+      >
+      <div class="photo-overlay">
+        <span>Show Detail</span>
+      </div>
+    </li>
+  </ul>
+</section>
