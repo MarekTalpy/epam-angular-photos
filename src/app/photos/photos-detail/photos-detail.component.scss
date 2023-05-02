@@ -1,0 +1,22 @@
+.photo-detail {
+  text-align: center;
+}
+
+.photo-container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+
+  @media (min-width: 600px) {
+    padding-top: 1rem;
+  }
+}
+
+.photo {
+  flex-grow: 1;
+  border-radius: 5px;
+
+  @media (min-width: 600px) {
+    flex-grow: 0;
+  }
+}

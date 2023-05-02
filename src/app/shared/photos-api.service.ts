@@ -18,6 +18,6 @@ export class PhotosApiService {
   }
 
   fetchPhotoDetail(photoId: string): Observable<Photo> {
-    return this.http.get<Photo>(`${ROOT_URL}/id/${photoId}`);
+    return this.http.get<Photo>(`${ROOT_URL}/id/${photoId}/info`);
   }
 }

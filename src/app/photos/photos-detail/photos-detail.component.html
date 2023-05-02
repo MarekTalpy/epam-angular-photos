@@ -1,1 +1,11 @@
-Photos Detail Screen
+
+<section class="photo-detail">
+  <div class="photo-container" *ngIf="(selectedPhoto$ | async) as selectedPhoto">
+    <img
+      [src]="selectedPhoto.download_url | resizeImage:400:600"
+      alt="photo detail"
+      class="photo"
+    >
+  </div>
+  <button mat-raised-button color="primary">Add to Favorites</button>
+</section>

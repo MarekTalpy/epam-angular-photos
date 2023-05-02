@@ -1,3 +1,3 @@
 <ng-container *ngIf="photos$ | async">
-  <app-photos-grid [photos]="photos$ | async">
+  <app-photos-grid [photos]="photos$ | async" (photoClick)="handlePhotoClicked($event)">
 <ng-container />
