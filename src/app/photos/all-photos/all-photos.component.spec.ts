@@ -17,7 +17,7 @@ describe('AllPhotosComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AllPhotosComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
