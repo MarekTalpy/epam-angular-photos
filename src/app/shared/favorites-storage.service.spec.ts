@@ -67,6 +67,12 @@ describe('FavoritesStorageService', () => {
 
       expect(service.isInFavorites('3')).toBeFalsy();
     });
+
+    it('should return false if there is no data for "favorites" key in Local storage', () => {
+      spyOn(localStorageService, 'getData').and.returnValue(null);
+
+      expect(service.isInFavorites('3')).toBeFalsy();
+    });
   });
 
   describe('toggleFavorites', () => {
