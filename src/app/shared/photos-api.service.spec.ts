@@ -70,7 +70,7 @@ describe('Photos', () => {
         expect(photo).toEqual(dummyPhoto);
       });
 
-      const req = httpMock.expectOne(`https://picsum.photos/id/12345`);
+      const req = httpMock.expectOne(`https://picsum.photos/id/12345/info`);
       expect(req.request.method).toBe('GET');
       req.flush(dummyPhoto);
     });
