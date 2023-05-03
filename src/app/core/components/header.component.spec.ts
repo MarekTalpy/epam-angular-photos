@@ -1,20 +1,32 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { ReplaySubject } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
 
 import { HeaderComponent } from './header.component';
-import { MatButtonModule } from '@angular/material/button';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let router: Router;
+  const eventSubject = new ReplaySubject<RouterEvent>(1);
+  const routerMock = {
+    navigateByUrl: jasmine.createSpy('navigateByUrl'),
+    events: eventSubject.asObservable(),
+  };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, MatButtonModule],
       declarations: [HeaderComponent],
+      providers: [
+        {
+          provide: Router,
+          useValue: routerMock,
+        },
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
@@ -31,18 +43,34 @@ describe('HeaderComponent', () => {
   });
 
   it('should navigate to home (Photos) page', () => {
-    const navigateByUrlSpy = spyOn(router, 'navigateByUrl');
-
     component.navigateToPhotos();
 
-    expect(navigateByUrlSpy).toHaveBeenCalledWith('/');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/');
   });
 
   it('should navigate to favorites page', () => {
-    const navigateByUrlSpy = spyOn(router, 'navigateByUrl');
-
     component.navigateToFavorites();
 
-    expect(navigateByUrlSpy).toHaveBeenCalledWith('/favorites');
+    expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/favorites');
+  });
+
+  it('should set a correct url', (done) => {
+    const dummyUrl = '/dummyUrl';
+    const dummyRedirectUrl = '/dummyUrlTo';
+    const dummyId = 123;
+    const dummyNavigationObj = new NavigationEnd(
+      dummyId,
+      dummyUrl,
+      dummyRedirectUrl
+    );
+    eventSubject.next(dummyNavigationObj);
+
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    component.currentUrl$.subscribe((url) => {
+      expect(url).toBe(dummyUrl);
+      done();
+    });
   });
 });
