@@ -6,6 +6,12 @@
       alt="photo detail"
       class="photo"
     >
+    <button
+      mat-raised-button
+      color="primary"
+      class="favorites-button"
+      (click)="toggleFavorites(selectedPhoto)">
+      {{ getButtonLabel(selectedPhoto.id) }}
+    </button>
   </div>
-  <button mat-raised-button color="primary">Add to Favorites</button>
 </section>
