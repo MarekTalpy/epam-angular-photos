@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { take } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 import { Photo } from 'src/app/shared/models/photo.model';
-import { ActivatedRoute } from '@angular/router';
 import { PhotosApiService } from 'src/app/shared/services/photos-api.service';
 import { FavoritesStorageService } from 'src/app/shared/services/favorites-storage.service';
 
@@ -12,11 +12,12 @@ type FavoritesButtonLabel = 'Add to Favorites' | 'Remove from Favorites';
   selector: 'app-photos-detail',
   templateUrl: './photos-detail.component.html',
   styleUrls: ['./photos-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotosDetailComponent {
-  selectedPhoto$: Observable<Photo | null>;
+  selectedPhoto: Photo | null = null;
   isInFavorites: boolean;
+  isLoading = false;
+  isError = false;
 
   constructor(
     private readonly photosApiService: PhotosApiService,
@@ -25,8 +26,20 @@ export class PhotosDetailComponent {
   ) {}
 
   ngOnInit(): void {
-    const imageId = this.route.snapshot.paramMap.get('id') as string;
-    this.selectedPhoto$ = this.photosApiService.fetchPhotoDetail(imageId);
+    const photoId = this.route.snapshot.paramMap.get('id') as string;
+    this.isLoading = true;
+    this.photosApiService
+      .fetchPhotoDetail(photoId)
+      .pipe(take(1))
+      .subscribe((photo) => {
+        if (photo === null) {
+          this.isError = true;
+          this.isLoading = false;
+        } else {
+          this.selectedPhoto = { ...photo };
+          this.isLoading = false;
+        }
+      });
   }
 
   getButtonLabel(photoId: string): FavoritesButtonLabel {

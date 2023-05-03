@@ -32,3 +32,16 @@
   border-bottom-right-radius: 5px;
   font-size: 1.25rem;
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.error {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.25rem;
+  color: #F44336;
+}

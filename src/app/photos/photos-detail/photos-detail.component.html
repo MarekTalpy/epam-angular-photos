@@ -1,6 +1,6 @@
 
 <section class="photo-detail">
-  <div class="photo-container" *ngIf="(selectedPhoto$ | async) as selectedPhoto">
+  <div class="photo-container" *ngIf="selectedPhoto && !isLoading">
     <img
       [src]="selectedPhoto.download_url | resizeImage:400:600"
       alt="photo detail"
@@ -14,4 +14,12 @@
       {{ getButtonLabel(selectedPhoto.id) }}
     </button>
   </div>
+
+  <div *ngIf="isLoading" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <h3 *ngIf="isError && !isLoading" class="error">
+    Something went wrong when fetching photo detail
+  </h3>
 </section>
