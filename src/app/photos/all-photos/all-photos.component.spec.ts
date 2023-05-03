@@ -5,24 +5,19 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AllPhotosComponent } from './all-photos.component';
 import { Router } from '@angular/router';
 import { PhotosApiService } from 'src/app/shared/services/photos-api.service';
+import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AllPhotosComponent', () => {
   let component: AllPhotosComponent;
   let fixture: ComponentFixture<AllPhotosComponent>;
-  const mockPhotosApiService = jasmine.createSpyObj('PhotosApiService', [
-    'fetchPhotos',
-  ]);
+  let photosApiService: PhotosApiService;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientTestingModule],
       declarations: [AllPhotosComponent],
-      providers: [
-        {
-          provide: PhotosApiService,
-          useValue: mockPhotosApiService,
-        },
-      ],
+      providers: [PhotosApiService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
@@ -30,6 +25,8 @@ describe('AllPhotosComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AllPhotosComponent);
     component = fixture.componentInstance;
+    photosApiService = TestBed.inject(PhotosApiService);
+    spyOn(photosApiService, 'fetchPhotos').and.returnValue(of([]));
     fixture.detectChanges();
   });
 

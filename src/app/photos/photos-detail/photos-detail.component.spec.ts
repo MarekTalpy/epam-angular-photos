@@ -1,28 +1,27 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { PhotosDetailComponent } from './photos-detail.component';
 import { PhotosApiService } from 'src/app/shared/services/photos-api.service';
 import { FavoritesStorageService } from 'src/app/shared/services/favorites-storage.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('PhotosDetailComponent', () => {
   let component: PhotosDetailComponent;
   let fixture: ComponentFixture<PhotosDetailComponent>;
-  const mockPhotosApiService = jasmine.createSpyObj('PhotosApiService', [
-    'fetchPhotoDetail',
-  ]);
   let favoritesStorageService: FavoritesStorageService;
+  let photosApiService: PhotosApiService;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, SharedModule],
       declarations: [PhotosDetailComponent],
-      providers: [
-        {
-          provide: PhotosApiService,
-          useValue: mockPhotosApiService,
-        },
-      ],
+      providers: [PhotosApiService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -30,6 +29,17 @@ describe('PhotosDetailComponent', () => {
     fixture = TestBed.createComponent(PhotosDetailComponent);
     component = fixture.componentInstance;
     favoritesStorageService = TestBed.inject(FavoritesStorageService);
+    photosApiService = TestBed.inject(PhotosApiService);
+    spyOn(photosApiService, 'fetchPhotoDetail').and.returnValue(
+      of({
+        id: '1',
+        author: 'Author 1',
+        width: 100,
+        height: 200,
+        url: 'https://unsplash.com/1',
+        download_url: 'https://picsum.photos/1',
+      })
+    );
     fixture.detectChanges();
   });
 
