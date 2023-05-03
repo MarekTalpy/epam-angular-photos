@@ -1,0 +1,11 @@
+<app-infinite-scroll (scrolled)="handleScroll()">
+  <app-photos-grid [photos]="allLoadedPhotos" (photoClick)="handlePhotoClicked($event)" />
+</app-infinite-scroll>
+
+<div *ngIf="isLoading" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<h3 *ngIf="isError && !isLoading" class="error">
+  Something went wrong when fetching photos
+</h3>

@@ -1,0 +1,15 @@
+<mat-toolbar class="header">
+  <button
+    class="header-button"
+    mat-raised-button
+    (click)="navigateToPhotos()"
+    [color]="((currentUrl$ | async) === '/') && 'primary'">
+    Photos
+  </button>
+  <button
+    mat-raised-button
+    (click)="navigateToFavorites()"
+    [color]="((currentUrl$ | async) === '/favorites') && 'primary'">
+    Favorites
+  </button>
+</mat-toolbar>

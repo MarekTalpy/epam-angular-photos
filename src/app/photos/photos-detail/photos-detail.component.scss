@@ -1,0 +1,47 @@
+.photo-detail {
+  text-align: center;
+}
+
+.photo-container {
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+
+  @media (min-width: 600px) {
+    padding-top: 1rem;
+  }
+}
+
+.photo {
+  flex-grow: 1;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  @media (min-width: 600px) {
+    flex-grow: 0;
+  }
+}
+
+.favorites-button {
+  padding: 1.5rem 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-size: 1.25rem;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.error {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.25rem;
+  color: #F44336;
+}

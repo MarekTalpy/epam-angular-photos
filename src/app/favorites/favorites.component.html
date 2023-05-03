@@ -1,0 +1,7 @@
+<ng-container *ngIf="favoritePhotos && favoritePhotos.length > 0; else noFavorites">
+  <app-photos-grid [photos]="favoritePhotos" (photoClick)="handlePhotoClicked($event)" />
+</ng-container>
+
+<ng-template #noFavorites>
+  <h3 class="no-favorites">There are no favorite photos saved in your gallery!</h3>
+</ng-template>
