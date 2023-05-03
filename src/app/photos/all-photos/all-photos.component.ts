@@ -8,6 +8,7 @@ import { PhotosApiService } from 'src/app/shared/photos-api.service';
 @Component({
   selector: 'app-all-photos',
   templateUrl: './all-photos.component.html',
+  styleUrls: ['./all-photos.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllPhotosComponent {

@@ -1,3 +1,11 @@
-<ng-container *ngIf="photos$ | async">
-  <app-photos-grid [photos]="photos$ | async" (photoClick)="handlePhotoClicked($event)">
-<ng-container />
+<ng-container *ngIf="(photos$ | async) as photos; else fetchingPhotos">
+  <app-photos-grid [photos]="photos" (photoClick)="handlePhotoClicked($event)" />
+
+  <h3 *ngIf="photos.length === 0">Something went wrong when fetching photos</h3>
+</ng-container>
+
+<ng-template #fetchingPhotos>
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
