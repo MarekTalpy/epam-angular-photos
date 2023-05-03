@@ -1,7 +1,7 @@
 <ng-container *ngIf="(photos$ | async) as photos; else fetchingPhotos">
   <app-photos-grid [photos]="photos" (photoClick)="handlePhotoClicked($event)" />
 
-  <h3 *ngIf="photos.length === 0">Something went wrong when fetching photos</h3>
+  <h3 *ngIf="photos.length === 0" class="error">Something went wrong when fetching photos</h3>
 </ng-container>
 
 <ng-template #fetchingPhotos>
