@@ -1,1 +1,5 @@
-Favorites Screen
+<ng-container *ngIf="favoritePhotos && favoritePhotos.length > 0; noFavorites">
+  <app-photos-grid [photos]="favoritePhotos" (photoClick)="handlePhotoClicked($event)">
+<ng-container />
+
+<ng-template #noFavorites>There are no favorite photos saved in your gallery</ng-template>

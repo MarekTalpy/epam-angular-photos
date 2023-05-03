@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AllPhotosComponent } from './all-photos.component';
 import { PhotosApiService } from 'src/app/shared/photos-api.service';
+import { Router } from '@angular/router';
 
 describe('AllPhotosComponent', () => {
   let component: AllPhotosComponent;
@@ -34,5 +35,24 @@ describe('AllPhotosComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('handlePhotoClicked', () => {
+    it('should navigate to the correct url', () => {
+      const router = TestBed.inject(Router);
+      const dummyPhoto = {
+        id: '123',
+        author: 'Author 123',
+        width: 100,
+        height: 200,
+        url: 'https://unsplash.com/123',
+        download_url: 'https://picsum.photos/123',
+      };
+      const navigateByUrlSpy = spyOn(router, 'navigateByUrl');
+
+      component.handlePhotoClicked(dummyPhoto);
+
+      expect(navigateByUrlSpy).toHaveBeenCalledWith('/photos/123');
+    });
   });
 });
