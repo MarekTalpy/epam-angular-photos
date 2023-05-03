@@ -15,7 +15,7 @@ type FavoritesButtonLabel = 'Add to Favorites' | 'Remove from Favorites';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotosDetailComponent {
-  selectedPhoto$: Observable<Photo>;
+  selectedPhoto$: Observable<Photo | null>;
   isInFavorites: boolean;
 
   constructor(

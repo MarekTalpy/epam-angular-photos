@@ -24,7 +24,7 @@ describe('Photos', () => {
   });
 
   describe('fetchPhotos', () => {
-    it('should return an Observable<Photo[]>', () => {
+    it('should return an Observable<Photo[]>', (done) => {
       const dummyPhotos = [
         {
           id: '0',
@@ -45,18 +45,29 @@ describe('Photos', () => {
       ];
 
       service.fetchPhotos().subscribe((photos) => {
-        expect(photos.length).toBe(2);
+        expect(photos?.length).toBe(2);
         expect(photos).toEqual(dummyPhotos);
+        done();
       });
 
       const req = httpMock.expectOne(`https://picsum.photos/v2/list?limit=30`);
       expect(req.request.method).toBe('GET');
       req.flush(dummyPhotos);
     });
+
+    it('should return an Observable<null> if error', (done) => {
+      service.fetchPhotos().subscribe((err) => {
+        expect(err).toEqual(null);
+        done();
+      });
+
+      const req = httpMock.expectOne(`https://picsum.photos/v2/list?limit=30`);
+      (req as any).error();
+    });
   });
 
   describe('fetchPhotosDetail', () => {
-    it('should return an Observable<Photo>', () => {
+    it('should return an Observable<Photo>', (done) => {
       const dummyPhoto = {
         id: '12345',
         author: 'Author 12345',
@@ -68,11 +79,22 @@ describe('Photos', () => {
 
       service.fetchPhotoDetail('12345').subscribe((photo) => {
         expect(photo).toEqual(dummyPhoto);
+        done();
       });
 
       const req = httpMock.expectOne(`https://picsum.photos/id/12345/info`);
       expect(req.request.method).toBe('GET');
       req.flush(dummyPhoto);
+    });
+
+    it('should return an Observable<null> if error', (done) => {
+      service.fetchPhotoDetail('fakeId').subscribe((err) => {
+        expect(err).toEqual(null);
+        done();
+      });
+
+      const req = httpMock.expectOne(`https://picsum.photos/id/fakeId/info`);
+      (req as any).error();
     });
   });
 });

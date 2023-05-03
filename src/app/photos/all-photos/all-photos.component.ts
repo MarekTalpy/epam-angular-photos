@@ -11,7 +11,7 @@ import { PhotosApiService } from 'src/app/shared/photos-api.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllPhotosComponent {
-  photos$: Observable<Photo[]> | null;
+  photos$: Observable<Photo[] | null>;
 
   constructor(
     private readonly photosApiService: PhotosApiService,
