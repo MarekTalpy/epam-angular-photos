@@ -41,8 +41,6 @@ export class AllPhotosComponent {
   }
 
   handleScroll(): void {
-    this.photosApiService.fetchPhotos();
-    console.log('bottom reached');
     this.isLoading = true;
     this.bottomPageReached$.next();
   }
