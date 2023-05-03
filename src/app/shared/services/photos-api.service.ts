@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, delay, of } from 'rxjs';
 
-import { Photo } from './photo.model';
+import { Photo } from '../models/photo.model';
 
 const ROOT_URL = 'https://picsum.photos';
 

@@ -1,10 +1,10 @@
-import { FavoritesStorageService } from './../../shared/favorites-storage.service';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { PhotosApiService } from '../../shared/photos-api.service';
-import { Photo } from 'src/app/shared/photo.model';
+import { Photo } from 'src/app/shared/models/photo.model';
 import { ActivatedRoute } from '@angular/router';
+import { PhotosApiService } from 'src/app/shared/services/photos-api.service';
+import { FavoritesStorageService } from 'src/app/shared/services/favorites-storage.service';
 
 type FavoritesButtonLabel = 'Add to Favorites' | 'Remove from Favorites';
 

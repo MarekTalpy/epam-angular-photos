@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatButtonModule } from '@angular/material/button';
 
 import { PhotosGridComponent } from './photos-grid.component';
-import { Photo } from '../photo.model';
+import { Photo } from '../models/photo.model';
 
 describe('PhotosGridComponent', () => {
   let component: PhotosGridComponent;

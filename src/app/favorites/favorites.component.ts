@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Photo } from '../shared/photo.model';
+import { Photo } from '../shared/models/photo.model';
 import {
   LocalStorageKeys,
   LocalStorageService,
-} from '../shared/local-storage.service';
+} from '../shared/services/local-storage.service';
 
 @Component({
   selector: 'app-favorites',

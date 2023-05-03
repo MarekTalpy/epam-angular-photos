@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AllPhotosComponent } from './all-photos.component';
-import { PhotosApiService } from 'src/app/shared/photos-api.service';
 import { Router } from '@angular/router';
+import { PhotosApiService } from 'src/app/shared/services/photos-api.service';
 
 describe('AllPhotosComponent', () => {
   let component: AllPhotosComponent;

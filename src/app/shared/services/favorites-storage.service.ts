@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Photo } from './photo.model';
 import { LocalStorageKeys, LocalStorageService } from './local-storage.service';
+import { Photo } from '../models/photo.model';
 
 @Injectable({
   providedIn: 'root',

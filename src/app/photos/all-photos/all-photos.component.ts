@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { Photo } from 'src/app/shared/photo.model';
-import { PhotosApiService } from 'src/app/shared/photos-api.service';
+import { Photo } from 'src/app/shared/models/photo.model';
+import { PhotosApiService } from 'src/app/shared/services/photos-api.service';
 
 @Component({
   selector: 'app-all-photos',

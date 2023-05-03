@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { Photo } from '../photo.model';
+import { Photo } from '../models/photo.model';
 
 @Component({
   selector: 'app-photos-grid',

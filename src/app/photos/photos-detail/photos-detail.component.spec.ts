@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { PhotosApiService } from 'src/app/shared/photos-api.service';
 import { PhotosDetailComponent } from './photos-detail.component';
-import { FavoritesStorageService } from 'src/app/shared/favorites-storage.service';
+import { PhotosApiService } from 'src/app/shared/services/photos-api.service';
+import { FavoritesStorageService } from 'src/app/shared/services/favorites-storage.service';
 
 describe('PhotosDetailComponent', () => {
   let component: PhotosDetailComponent;
