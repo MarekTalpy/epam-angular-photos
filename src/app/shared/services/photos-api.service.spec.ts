@@ -57,7 +57,7 @@ describe('Photos', () => {
 
     it('should return an Observable<null> if error', (done) => {
       service.fetchPhotos().subscribe((err) => {
-        expect(err).toEqual([]);
+        expect(err).toEqual(null);
         done();
       });
 
