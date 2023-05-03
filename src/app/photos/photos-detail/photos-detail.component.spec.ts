@@ -1,4 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { of } from 'rxjs';
@@ -30,16 +36,6 @@ describe('PhotosDetailComponent', () => {
     component = fixture.componentInstance;
     favoritesStorageService = TestBed.inject(FavoritesStorageService);
     photosApiService = TestBed.inject(PhotosApiService);
-    spyOn(photosApiService, 'fetchPhotoDetail').and.returnValue(
-      of({
-        id: '1',
-        author: 'Author 1',
-        width: 100,
-        height: 200,
-        url: 'https://unsplash.com/1',
-        download_url: 'https://picsum.photos/1',
-      })
-    );
     fixture.detectChanges();
   });
 
@@ -80,5 +76,39 @@ describe('PhotosDetailComponent', () => {
 
       expect(toggleFavoritesSpy).toHaveBeenCalledWith(selectedDummyPhoto);
     });
+  });
+
+  describe('ngOnInit', () => {
+    it('should set isError and isLoading boolean values in case of the error correctly', fakeAsync(() => {
+      spyOn(photosApiService, 'fetchPhotoDetail').and.returnValue(of(null));
+
+      component.ngOnInit();
+      tick();
+      fixture.detectChanges();
+
+      expect(component.isError).toBeTruthy();
+      expect(component.isLoading).toBeFalsy();
+    }));
+
+    it('should set isError and isLoading boolean values in case of the success correctly', fakeAsync(() => {
+      spyOn(photosApiService, 'fetchPhotoDetail').and.returnValue(
+        of({
+          id: '1',
+          author: 'Author 2',
+          width: 100,
+          height: 200,
+          url: 'https://unsplash.com/...',
+          download_url: 'https://picsum.photos/...',
+        })
+      );
+
+      component.ngOnInit();
+      tick();
+      fixture.detectChanges();
+
+      expect(component.isError).toBeFalsy();
+      expect(component.isLoading).toBeFalsy();
+      expect(component.selectedPhoto).toBeTruthy();
+    }));
   });
 });
