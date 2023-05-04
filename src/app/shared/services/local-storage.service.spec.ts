@@ -1,6 +1,6 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorageKeys, LocalStorageService } from './local-storage.service';
 
 describe('LocalStorageService', () => {
   let service: LocalStorageService;
@@ -26,7 +26,7 @@ describe('LocalStorageService', () => {
         },
       ];
       const dummyDataStringified = '[{"id":"0","author":"Author 1"}]';
-      const dummyKey = 'lsKey';
+      const dummyKey = LocalStorageKeys.FAVORITES;
 
       service.saveData(dummyKey, dummyData);
 
@@ -37,7 +37,7 @@ describe('LocalStorageService', () => {
   describe('getData', () => {
     it('should return null if no data are stored in local storage for given key', () => {
       spyOn(localStorage, 'getItem').and.returnValue(null);
-      const dummyKey = 'key123';
+      const dummyKey = LocalStorageKeys.FAVORITES;
 
       const savedDummyData = service.getData(dummyKey);
 
@@ -53,7 +53,7 @@ describe('LocalStorageService', () => {
         },
       ];
       spyOn(localStorage, 'getItem').and.returnValue(dummyDataStringified);
-      const dummyKey = 'key123';
+      const dummyKey = LocalStorageKeys.FAVORITES;
 
       const savedDummyData = service.getData(dummyKey);
 

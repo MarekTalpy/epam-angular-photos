@@ -16,12 +16,15 @@ export class FavoritesStorageService {
         const photosToSave = favorites.filter(
           (favoritePhoto) => favoritePhoto.id !== photo.id
         );
-        this.LS.saveData(LocalStorageKeys.FAVORITES, photosToSave);
+        this.LS.saveData<Photo[]>(LocalStorageKeys.FAVORITES, photosToSave);
       } else {
-        this.LS.saveData(LocalStorageKeys.FAVORITES, [...favorites, photo]);
+        this.LS.saveData<Photo[]>(LocalStorageKeys.FAVORITES, [
+          ...favorites,
+          photo,
+        ]);
       }
     } else {
-      this.LS.saveData(LocalStorageKeys.FAVORITES, [photo]);
+      this.LS.saveData<Photo[]>(LocalStorageKeys.FAVORITES, [photo]);
     }
   }
 

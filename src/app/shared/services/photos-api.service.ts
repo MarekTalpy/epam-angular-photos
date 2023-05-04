@@ -8,7 +8,7 @@ const ROOT_URL = 'https://picsum.photos';
 
 @Injectable({ providedIn: 'root' })
 export class PhotosApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   fetchPhotos(limit = 30): Observable<Photo[] | null> {
     const randomDelay = Math.floor(Math.random() * (300 - 200 + 1) + 200);

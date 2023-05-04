@@ -6,13 +6,13 @@ import {
   tick,
   waitForAsync,
 } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { of } from 'rxjs';
 
 import { AllPhotosComponent } from './all-photos.component';
-import { Router } from '@angular/router';
 import { PhotosApiService } from 'src/app/shared/services/photos-api.service';
-import { of, throwError } from 'rxjs';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AllPhotosComponent', () => {
   let component: AllPhotosComponent;

@@ -8,11 +8,11 @@ export enum LocalStorageKeys {
   providedIn: 'root',
 })
 export class LocalStorageService {
-  saveData(key: string, value: any): void {
+  saveData<T>(key: LocalStorageKeys, value: T): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getData<T>(key: string): T | null {
+  getData<T>(key: LocalStorageKeys): T | null {
     const savedItem = localStorage.getItem(key);
     if (!savedItem) {
       return null;
